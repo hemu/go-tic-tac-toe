@@ -40,5 +40,14 @@ func main() {
     b.Mark(row, col, board.Player(player))
     player = (player + 1) % 2
     fmt.Println(b)
+    gameOver, winningPlayer := b.IsGameOver()
+    if gameOver {
+      if winningPlayer == board.Player(-1) {
+        fmt.Println("Game over, it was a draw :D")
+      } else {
+        fmt.Printf("Player %v wins! :D\n", winningPlayer)
+      }
+      break
+    }
   }
 }
