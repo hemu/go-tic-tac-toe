@@ -76,59 +76,24 @@ func TestBoardWin(t *testing.T) {
       t.Errorf("Expected board %v to return isWinBoard:%t", test.board, test.want)
     }
   }
-
 }
 
-// func TestBoardWinByRows(t *testing.T) {
-//   b := NewBoard()
-//   var end bool
-//   var winner Player
-
-//   end, winner = b.Winner()
-//   if end != false {
-//     t.Errorf("Expected no winner at start of game")
-//   }
-
-//   b.Mark(1, 0, 1)
-//   b.Mark(1, 1, 1)
-//   end, winner = b.Winner()
-//   if end != false {
-//     t.Errorf("Expected no winner after only 2 in a row but got end: %v, winner: %v",
-//       end, winner)
-//   }
-
-//   b.Mark(1, 2, 1)
-//   end, winner = b.Winner()
-//   fmt.Println(b)
-//   if end != true || winner != 1 {
-//     t.Errorf("Expected player 1 winner in second row but got end: %v, winner: %v",
-//             end, winner)
-//   }
-// }
-
-// func TestBoardWinByCol(t *testing.T) {
-//   b := NewBoard()
-//   var end bool
-//   var winner Player
-
-//   end, winner = b.Winner()
-//   if end != false {
-//     t.Errorf("Expected no winner at start of game")
-//   }
-
-//   b.Mark(0, 1, 2)
-//   b.Mark(1, 1, 2)
-//   end, winner = b.Winner()
-//   if end != false {
-//     t.Errorf("Expected no winner after only 2 in a col but got end: %v, winner: %v",
-//       end, winner)
-//   }
-
-//   b.Mark(2, 1, 2)
-//   end, winner = b.Winner()
-//   fmt.Println(b)
-//   if end != true || winner != 2 {
-//     t.Errorf("Expected player 2 winner in second col but got end: %v, winner: %v",
-//             end, winner)
-//   }
-// }
+func TestBoardFull(t *testing.T) {
+  b := NewBoard()
+  b.Mark(0, 0, 0)
+  b.Mark(0, 1, 1)
+  b.Mark(0, 2, 1)
+  b.Mark(1, 0, 1)
+  b.Mark(1, 1, 0)
+  b.Mark(1, 2, 0)
+  b.Mark(2, 0, 0)
+  b.Mark(2, 1, 1)
+  b.Mark(2, 2, 1)
+  gameOver, winningPlayer := b.IsGameOver()
+  if !gameOver {
+    t.Errorf("Expected game to be over because of full board")
+  }
+  if winningPlayer != Player(-1) {
+    t.Errorf("Expected there to be no winning player but got %v", winningPlayer)
+  }
+}

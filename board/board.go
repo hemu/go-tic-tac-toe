@@ -47,7 +47,6 @@ func isWinBoard(board int64) bool {
   return false
 }
 
-
 type Board struct {
   players [2]int64
   board int64
@@ -84,6 +83,16 @@ func (b *Board) update() {
   for _, player := range b.players {
     b.board |= player
   }
+}
+
+func (b *Board) IsGameOver() (bool, Player) {
+  for i, player := range b.players {
+    if isWinBoard(player) {
+      return true, Player(i)
+    }
+  }
+  isBoardFull := b.board == 1 << uint(BOARD_SIZE*BOARD_SIZE) - 1
+  return isBoardFull, Player(-1)
 }
 
 func playerDisp(player Player) string {
