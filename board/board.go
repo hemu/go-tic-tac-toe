@@ -38,7 +38,7 @@ func boardDisplayToMask(display string) (int64, error) {
 }
 
 
-func isWinBoard(board int64) bool {
+func IsWinBoard(board int64) bool {
   for _, winMask := range winMasks {
     if winMask & board == winMask {
       return true
@@ -46,7 +46,6 @@ func isWinBoard(board int64) bool {
   }
   return false
 }
-
 
 type Board struct {
   players [2]int64
