@@ -6,7 +6,7 @@ import (
 )
 
 func TestBoardGridSize(t *testing.T) {
-  b := NewBoard(3)
+  b := NewBoard()
   if len(b.Grid) != 3 || 
      len(b.Grid[0]) != 3 ||
      len(b.Grid[1]) != 3 ||
@@ -16,7 +16,7 @@ func TestBoardGridSize(t *testing.T) {
 }
 
 func TestBoardMark(t *testing.T) {
-  b := NewBoard(3)
+  b := NewBoard()
   if b.Grid[0][0] != 0 {
     t.Errorf("Expected cell to be unmarked")
   }

@@ -2,16 +2,17 @@ package board
 
 type Player int
 
+const BOARD_SIZE int = 3
+
 type Board struct {
-  Size int
   Grid [][]Player
 }
 
-func NewBoard(size int) Board {
-  b := Board{Size: size}
-  b.Grid = make([][]Player, size)
-  for i := 0; i < size; i++ {
-    b.Grid[i] = make([]Player, size)
+func NewBoard() Board {
+  b := Board{}
+  b.Grid = make([][]Player, BOARD_SIZE)
+  for i := 0; i < BOARD_SIZE; i++ {
+    b.Grid[i] = make([]Player, BOARD_SIZE)
   }
   return b
 }
@@ -22,7 +23,7 @@ func (op InvalidOperation) Error() string {
 }
 
 func (b *Board) Mark(row int, col int, player Player) error {
-  if row >= b.Size || col >= b.Size {
+  if row >= BOARD_SIZE || col >= BOARD_SIZE {
     return InvalidOperation{}
   }
   b.Grid[row][col] = Player(player)
