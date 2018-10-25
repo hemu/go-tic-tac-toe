@@ -78,3 +78,22 @@ func TestBoardWin(t *testing.T) {
   }
 }
 
+func TestBoardFull(t *testing.T) {
+  b := NewBoard()
+  b.Mark(0, 0, 0)
+  b.Mark(0, 1, 1)
+  b.Mark(0, 2, 1)
+  b.Mark(1, 0, 1)
+  b.Mark(1, 1, 0)
+  b.Mark(1, 2, 0)
+  b.Mark(2, 0, 0)
+  b.Mark(2, 1, 1)
+  b.Mark(2, 2, 1)
+  gameOver, winningPlayer := b.IsGameOver()
+  if !gameOver {
+    t.Errorf("Expected game to be over because of full board")
+  }
+  if winningPlayer != Player(-1) {
+    t.Errorf("Expected there to be no winning player but got %v", winningPlayer)
+  }
+}

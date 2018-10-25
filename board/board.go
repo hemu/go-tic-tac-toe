@@ -38,7 +38,7 @@ func boardDisplayToMask(display string) (int64, error) {
 }
 
 
-func IsWinBoard(board int64) bool {
+func isWinBoard(board int64) bool {
   for _, winMask := range winMasks {
     if winMask & board == winMask {
       return true
@@ -83,6 +83,16 @@ func (b *Board) update() {
   for _, player := range b.players {
     b.board |= player
   }
+}
+
+func (b *Board) IsGameOver() (bool, Player) {
+  for i, player := range b.players {
+    if isWinBoard(player) {
+      return true, Player(i)
+    }
+  }
+  isBoardFull := b.board == 1 << uint(BOARD_SIZE*BOARD_SIZE) - 1
+  return isBoardFull, Player(-1)
 }
 
 func playerDisp(player Player) string {
